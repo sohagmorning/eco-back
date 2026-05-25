@@ -3,18 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>SupMart — Demo Landing</title>
-    <!-- MDB UI Kit (free) -->
+    <title>Seller Dashboard — SupMart</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- Navbar -->
     <header>
       <nav class="navbar navbar-light bg-white shadow-sm">
         <div class="container d-flex align-items-center justify-content-between">
           <a class="navbar-brand fw-bold mb-0" href="index.html">SupMart</a>
-
           <button
             class="menu-trigger"
             type="button"
@@ -30,12 +27,7 @@
         </div>
       </nav>
 
-      <div
-        class="offcanvas offcanvas-end"
-        tabindex="-1"
-        id="siteMenu"
-        aria-labelledby="siteMenuLabel"
-      >
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="siteMenu" aria-labelledby="siteMenuLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="siteMenuLabel">Menu</h5>
           <button type="button" class="btn-close text-reset" data-mdb-dismiss="offcanvas" aria-label="Close"></button>
@@ -52,61 +44,18 @@
       </div>
     </header>
 
-    <!-- Hero -->
-    <section class="py-5 text-center hero">
+    <main class="py-5">
       <div class="container">
-        <h1 class="display-5 fw-bold">Sell & Buy Digital Products</h1>
-        <p class="lead text-muted">Responsive, mobile-first demo using MDBootstrap-style UI.</p>
-        <a class="btn btn-lg btn-outline-primary" href="products.html">Explore Products</a>
+        <h1>Seller Dashboard</h1>
+        <p class="text-muted">Placeholder — seller controls, product listing and analytics will be here.</p>
       </div>
-    </section>
+    </main>
 
-    <!-- Featured products -->
-    <section class="py-5">
-      <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h3>Featured Products</h3>
-          <a href="products.html">See all</a>
-        </div>
-        <div class="row" id="featured">
-          <!-- JS will inject sample cards here using script.js -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials / FAQ -->
-    <section class="py-5 bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <h4>What our users say</h4>
-            <p class="text-muted">"Great marketplace for digital creators."</p>
-          </div>
-          <div class="col-md-6" id="faq">
-            <h4>FAQ</h4>
-            <ul>
-              <li>How do downloads work? — Secure links after purchase.</li>
-              <li>What payments are supported? — Stripe, Razorpay, PayPal (demo).</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
     <footer class="py-4 text-center">
       <div class="container">
         <small class="text-muted">© SupMart — Demo</small>
       </div>
     </footer>
-
-    <!-- Mobile bottom nav -->
-    <div class="mobile-bottom-nav d-lg-none">
-      <a href="index.html" class="active">Home</a>
-      <a href="products.html">Products</a>
-      <a href="cart.html">Cart</a>
-      <a href="profile.html">Profile</a>
-    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
     <script src="script.js"></script>
