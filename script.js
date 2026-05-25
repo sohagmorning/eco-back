@@ -1,4 +1,9 @@
 // Lightweight demo app script used by multiple demo pages
+// List of available product images (from assets/products)
+const productImages = [
+  '1.avif','2.avif','3.avif','download (1).jpg','download.jpg','file-1715714113747-b8b0561c490eimage.avif','images.jpg','pexels-kumar-koirala-81844054-15274101.jpg','pexels-sales-trust-162265874-10825676.jpg','pexels-vika-glitter-392079-33653166.jpg','photo-1526170375885-4d8ecf77b99f.avif','photo-1602143407151-7111542de6e8.avif','premium_photo-1664392147011-2a720f214e01.avif','premium_photo-1675896084254-dcb626387e1e.avif'
+];
+
 const sampleProducts = [
   {id:1,name:'Ebook: Sustainable Living',price:350,desc:'Guide to eco living',cat:'ebooks',img:'assets/products/download.jpg'},
   {id:2,name:'Website Template: Green Shop',price:799,desc:'HTML/CSS template',cat:'templates',img:'assets/products/images.jpg'},
@@ -94,7 +99,20 @@ function loadProductDetail(){
   const desc = document.getElementById('productDesc'); if(desc) desc.textContent = p.desc;
   const price = document.getElementById('productPrice'); if(price) price.textContent = formatPrice(p.price);
   const add = document.getElementById('addToCart'); if(add) add.addEventListener('click', ()=>{ addToCart(p.id); alert('Added to cart') });
-  const imgWrap = document.getElementById('productImage'); if(imgWrap) imgWrap.innerHTML = `<img src="${p.img}" alt="${p.name}" class="img-fluid" />`;
+  const imgWrap = document.getElementById('productImage');
+  if(imgWrap){
+    // Main image
+    imgWrap.innerHTML = `<div class="product-main"><img src="${p.img}" alt="${p.name}" class="img-fluid" id="mainProductImg" /></div><div class="product-thumbs d-flex gap-2 mt-3" id="productThumbs"></div>`;
+    const thumbs = document.getElementById('productThumbs');
+    // render thumbnails from productImages (show up to 8)
+    productImages.slice(0,8).forEach(fn=>{
+      const path = 'assets/products/'+fn;
+      const t = document.createElement('div'); t.className='thumb-item';
+      t.innerHTML = `<img src="${path}" alt="thumb" class="img-thumbnail" style="width:72px;height:72px;object-fit:cover;border-radius:8px;cursor:pointer" />`;
+      t.addEventListener('click', ()=>{ const main = document.getElementById('mainProductImg'); if(main) main.src = path; });
+      thumbs.appendChild(t);
+    });
+  }
 }
 
 // Dark mode toggle (persisted)
