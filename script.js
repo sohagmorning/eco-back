@@ -1,17 +1,17 @@
 // Lightweight demo app script used by multiple demo pages
 const sampleProducts = [
-  {id:1,name:'Ebook: Sustainable Living',price:350,desc:'Guide to eco living',cat:'ebooks',img:'assets/products/product-01.svg'},
-  {id:2,name:'Website Template: Green Shop',price:799,desc:'HTML/CSS template',cat:'templates',img:'assets/products/product-02.svg'},
-  {id:3,name:'UI Kit Pack',price:499,desc:'Icons & components',cat:'templates',img:'assets/products/product-03.svg'},
-  {id:4,name:'Course: Composting',price:120,desc:'Video course',cat:'ebooks',img:'assets/products/product-04.svg'},
-  {id:5,name:'Photos Pack',price:250,desc:'Stock photos',cat:'templates',img:'assets/products/product-05.svg'},
-  {id:6,name:'Plugin: Analytics',price:1299,desc:'Downloadable plugin',cat:'templates',img:'assets/products/product-06.svg'},
-  {id:7,name:'Bundle: Social Media Kit',price:399,desc:'Templates & banners',cat:'templates',img:'assets/products/product-07.svg'},
-  {id:8,name:'Preset Pack',price:199,desc:'Photo presets',cat:'templates',img:'assets/products/product-08.svg'},
-  {id:9,name:'Icon Set',price:129,desc:'SVG icons',cat:'templates',img:'assets/products/product-09.svg'},
-  {id:10,name:'Theme: Minimal Blog',price:699,desc:'Blog theme',cat:'templates',img:'assets/products/product-10.svg'},
-  {id:11,name:'Checklist: Launch Plan',price:89,desc:'Printable checklist',cat:'ebooks',img:'assets/products/product-11.svg'},
-  {id:12,name:'Graphics Pack',price:299,desc:'Illustrations & mockups',cat:'templates',img:'assets/products/product-12.svg'}
+  {id:1,name:'Ebook: Sustainable Living',price:350,desc:'Guide to eco living',cat:'ebooks',img:'assets/products/download.jpg'},
+  {id:2,name:'Website Template: Green Shop',price:799,desc:'HTML/CSS template',cat:'templates',img:'assets/products/images.jpg'},
+  {id:3,name:'UI Kit Pack',price:499,desc:'Icons & components',cat:'templates',img:'assets/products/1.avif'},
+  {id:4,name:'Course: Composting',price:120,desc:'Video course',cat:'ebooks',img:'assets/products/2.avif'},
+  {id:5,name:'Photos Pack',price:250,desc:'Stock photos',cat:'templates',img:'assets/products/3.avif'},
+  {id:6,name:'Plugin: Analytics',price:1299,desc:'Downloadable plugin',cat:'templates',img:'assets/products/download (1).jpg'},
+  {id:7,name:'Bundle: Social Media Kit',price:399,desc:'Templates & banners',cat:'templates',img:'assets/products/file-1715714113747-b8b0561c490eimage.avif'},
+  {id:8,name:'Preset Pack',price:199,desc:'Photo presets',cat:'templates',img:'assets/products/pexels-kumar-koirala-81844054-15274101.jpg'},
+  {id:9,name:'Icon Set',price:129,desc:'SVG icons',cat:'templates',img:'assets/products/pexels-sales-trust-162265874-10825676.jpg'},
+  {id:10,name:'Theme: Minimal Blog',price:699,desc:'Blog theme',cat:'templates',img:'assets/products/pexels-vika-glitter-392079-33653166.jpg'},
+  {id:11,name:'Checklist: Launch Plan',price:89,desc:'Printable checklist',cat:'ebooks',img:'assets/products/photo-1526170375885-4d8ecf77b99f.avif'},
+  {id:12,name:'Graphics Pack',price:299,desc:'Illustrations & mockups',cat:'templates',img:'assets/products/premium_photo-1664392147011-2a720f214e01.avif'}
 ];
 
 let cart = JSON.parse(localStorage.getItem('demo_cart')||'{}');
