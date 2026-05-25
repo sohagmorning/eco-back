@@ -122,6 +122,12 @@ function setupDarkMode(){
 
 // Init on load
 document.addEventListener('DOMContentLoaded', ()=>{
+  // If URL has ?all=1 then clear filters/search and show all products
+  const params = new URLSearchParams(location.search);
+  if(params.get('all')==='1'){
+    const s = document.getElementById('searchInput'); if(s) s.value='';
+    const f = document.getElementById('filterCategory'); if(f) f.value='all';
+  }
   renderProductGrid(); setupProductsActions(); renderCartList(); loadProductDetail(); setupDarkMode();
 });
 
