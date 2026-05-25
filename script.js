@@ -26,10 +26,30 @@ function saveCart(){ localStorage.setItem('demo_cart', JSON.stringify(cart)); }
 function formatPrice(n){ return '৳ '+n.toFixed(2); }
 
 // Featured injection on index.html
-function renderFeatured(){
+const API_BASE = '/backend/api/products.php';
+
+async function fetchProductsAPI(params = {}){
+  // build URL relative to site
+  try{
+    const url = new URL(API_BASE, location.origin);
+    Object.keys(params).forEach(k=>{ if(params[k]!=null) url.searchParams.set(k, params[k]); });
+    const res = await fetch(url.href);
+    if(!res.ok) throw new Error('Network response not ok');
+    const data = await res.json();
+    if(!Array.isArray(data)) return Array.isArray(data.items)?data.items:[];
+    return data;
+  }catch(err){
+    console.warn('Product API fetch failed, using local sampleProducts', err);
+    return sampleProducts;
+  }
+}
+
+// Featured injection on index.html (fetches first 4 from API, fallback to sampleProducts)
+async function renderFeatured(){
   const el = document.getElementById('featured'); if(!el) return;
   el.innerHTML = '';
-  sampleProducts.slice(0,4).forEach(p=>{
+  const items = await fetchProductsAPI();
+  items.slice(0,4).forEach(p=>{
     const col = document.createElement('div'); col.className='col-md-3 mb-3';
     col.innerHTML = `
       <div class="card-e featured-card h-100">
@@ -48,10 +68,11 @@ function renderFeatured(){
 }
 
 // Product grid rendering for products.html
-function renderProductGrid(){
+async function renderProductGrid(params = {}){
   const grid = document.getElementById('productGrid'); if(!grid) return;
   grid.innerHTML = '';
-    sampleProducts.forEach(p=>{
+  const items = await fetchProductsAPI(params);
+  items.forEach(p=>{
     const col = document.createElement('div'); col.className='col-lg-4 col-md-6 mb-4';
     col.innerHTML = `<div class="card-e p-3 h-100"><div class="product-thumb"><img src="${p.img}" alt="${p.name}"></div><h5 class="mt-3">${p.name}</h5><p class="text-muted small">${p.desc}</p><div class="d-flex justify-content-between align-items-center"><div class="fw-bold text-primary">${formatPrice(p.price)}</div><div><button class="btn btn-sm btn-primary" data-id="${p.id}">Add</button> <a class="btn btn-sm btn-outline-secondary" href="product.html?id=${p.id}">Details</a></div></div></div>`;
     grid.appendChild(col);
@@ -63,13 +84,9 @@ function setupProductsActions(){
   const search = document.getElementById('searchInput');
   const filter = document.getElementById('filterCategory');
   if(search){ search.addEventListener('input', ()=>{
-    const q=search.value.toLowerCase(); const cat = filter.value;
-    const filtered = sampleProducts.filter(p=> (cat==='all'||p.cat===cat) && (p.name.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q)) );
-    const grid = document.getElementById('productGrid'); grid.innerHTML=''; filtered.forEach(p=>{
-      const col = document.createElement('div'); col.className='col-lg-4 col-md-6 mb-4';
-      col.innerHTML = `<div class="card-e p-3 h-100"><div class="product-thumb"><img src="${p.img}" alt="${p.name}"></div><h5 class="mt-3">${p.name}</h5><p class="text-muted small">${p.desc}</p><div class="d-flex justify-content-between align-items-center"><div class="fw-bold text-primary">${formatPrice(p.price)}</div><div><button class="btn btn-sm btn-primary" data-id="${p.id}">Add</button> <a class="btn btn-sm btn-outline-secondary" href="product.html?id=${p.id}">Details</a></div></div></div>`;
-      grid.appendChild(col);
-    });
+    const q=search.value.trim(); const cat = filter.value;
+    // query backend API for filtered results (graceful fallback to local data inside fetchProductsAPI)
+    renderProductGrid({ q:q||undefined, cat: (cat==='all' ? undefined : cat) });
   });
   if(filter){ filter.addEventListener('change', ()=>{ search.dispatchEvent(new Event('input')) }); }
 }
@@ -94,25 +111,50 @@ document.addEventListener('click', e=>{
 // Product details page loader
 function loadProductDetail(){
   const qs = new URLSearchParams(location.search); const id = qs.get('id'); if(!id) return;
-  const p = sampleProducts.find(x=>x.id==id); if(!p) return;
-  const title = document.getElementById('productTitle'); if(title) title.textContent = p.name;
-  const desc = document.getElementById('productDesc'); if(desc) desc.textContent = p.desc;
-  const price = document.getElementById('productPrice'); if(price) price.textContent = formatPrice(p.price);
-  const add = document.getElementById('addToCart'); if(add) add.addEventListener('click', ()=>{ addToCart(p.id); alert('Added to cart') });
-  const imgWrap = document.getElementById('productImage');
-  if(imgWrap){
-    // Main image
-    imgWrap.innerHTML = `<div class="product-main"><img src="${p.img}" alt="${p.name}" class="img-fluid" id="mainProductImg" /></div><div class="product-thumbs d-flex gap-2 mt-3" id="productThumbs"></div>`;
-    const thumbs = document.getElementById('productThumbs');
-    // render thumbnails from productImages (show up to 8)
-    productImages.slice(0,8).forEach(fn=>{
-      const path = 'assets/products/'+fn;
-      const t = document.createElement('div'); t.className='thumb-item';
-      t.innerHTML = `<img src="${path}" alt="thumb" class="img-thumbnail" style="width:72px;height:72px;object-fit:cover;border-radius:8px;cursor:pointer" />`;
-      t.addEventListener('click', ()=>{ const main = document.getElementById('mainProductImg'); if(main) main.src = path; });
-      thumbs.appendChild(t);
-    });
-  }
+  // try API first
+  (async ()=>{
+    try{
+      const res = await fetch(API_BASE + '?id=' + encodeURIComponent(id));
+      if(!res.ok) throw new Error('Not found');
+      const p = await res.json();
+      if(!p) throw new Error('No product');
+      const title = document.getElementById('productTitle'); if(title) title.textContent = p.name;
+      const desc = document.getElementById('productDesc'); if(desc) desc.textContent = p.desc;
+      const price = document.getElementById('productPrice'); if(price) price.textContent = formatPrice(p.price);
+      const add = document.getElementById('addToCart'); if(add) add.addEventListener('click', ()=>{ addToCart(p.id); alert('Added to cart') });
+      const imgWrap = document.getElementById('productImage');
+      if(imgWrap){
+        imgWrap.innerHTML = `<div class="product-main"><img src="${p.img}" alt="${p.name}" class="img-fluid" id="mainProductImg" /></div><div class="product-thumbs d-flex gap-2 mt-3" id="productThumbs"></div>`;
+        const thumbs = document.getElementById('productThumbs');
+        productImages.slice(0,8).forEach(fn=>{
+          const path = 'assets/products/'+fn;
+          const t = document.createElement('div'); t.className='thumb-item';
+          t.innerHTML = `<img src="${path}" alt="thumb" class="img-thumbnail" style="width:72px;height:72px;object-fit:cover;border-radius:8px;cursor:pointer" />`;
+          t.addEventListener('click', ()=>{ const main = document.getElementById('mainProductImg'); if(main) main.src = path; });
+          thumbs.appendChild(t);
+        });
+      }
+    }catch(err){
+      // fallback to local data
+      const p = sampleProducts.find(x=>x.id==id); if(!p) return;
+      const title = document.getElementById('productTitle'); if(title) title.textContent = p.name;
+      const desc = document.getElementById('productDesc'); if(desc) desc.textContent = p.desc;
+      const price = document.getElementById('productPrice'); if(price) price.textContent = formatPrice(p.price);
+      const add = document.getElementById('addToCart'); if(add) add.addEventListener('click', ()=>{ addToCart(p.id); alert('Added to cart') });
+      const imgWrap = document.getElementById('productImage');
+      if(imgWrap){
+        imgWrap.innerHTML = `<div class="product-main"><img src="${p.img}" alt="${p.name}" class="img-fluid" id="mainProductImg" /></div><div class="product-thumbs d-flex gap-2 mt-3" id="productThumbs"></div>`;
+        const thumbs = document.getElementById('productThumbs');
+        productImages.slice(0,8).forEach(fn=>{
+          const path = 'assets/products/'+fn;
+          const t = document.createElement('div'); t.className='thumb-item';
+          t.innerHTML = `<img src="${path}" alt="thumb" class="img-thumbnail" style="width:72px;height:72px;object-fit:cover;border-radius:8px;cursor:pointer" />`;
+          t.addEventListener('click', ()=>{ const main = document.getElementById('mainProductImg'); if(main) main.src = path; });
+          thumbs.appendChild(t);
+        });
+      }
+    }
+  })();
 }
 
 // Dark mode toggle (persisted)
