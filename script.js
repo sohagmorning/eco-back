@@ -104,6 +104,6 @@ function setupDarkMode(){
 
 // Init on load
 document.addEventListener('DOMContentLoaded', ()=>{
-  renderFeatured(); renderProductGrid(); setupProductsActions(); renderCartList(); loadProductDetail(); setupDarkMode();
+  renderProductGrid(); setupProductsActions(); renderCartList(); loadProductDetail(); setupDarkMode();
 });
 
