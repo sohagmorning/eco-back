@@ -162,6 +162,25 @@ function setupDarkMode(){
   const saved = localStorage.getItem('demo_theme'); if(saved==='dark') document.body.classList.add('dark');
 }
 
+// Auth API base
+const AUTH_API = '/backend/api/auth.php';
+
+// Attach login/signup handlers
+function setupAuthForms(){
+  const login = document.getElementById('loginForm');
+  const signup = document.getElementById('signupForm');
+  if(login){ login.addEventListener('submit', async (e)=>{
+    e.preventDefault(); const email = login.querySelector('input[type="email"]').value; const pass = login.querySelector('input[type="password"]').value;
+    const res = await fetch(AUTH_API, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'login', email, password:pass}) });
+    const data = await res.json(); if(res.ok && data.success){ location.href='profile.html'; } else { alert(data.error || 'Login failed'); }
+  }); }
+  if(signup){ signup.addEventListener('submit', async (e)=>{
+    e.preventDefault(); const name = signup.querySelector('input[placeholder="Name"]').value || signup.querySelector('input').value; const email = signup.querySelector('input[type="email"]').value; const pass = signup.querySelector('input[type="password"]').value;
+    const res = await fetch(AUTH_API, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'signup', name, email, password:pass}) });
+    const data = await res.json(); if(res.ok && data.success){ location.href='profile.html'; } else { alert(data.error || 'Signup failed'); }
+  }); }
+}
+
 // Init on load
 document.addEventListener('DOMContentLoaded', ()=>{
   // If URL has ?all=1 then clear filters/search and show all products

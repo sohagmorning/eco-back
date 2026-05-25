@@ -26,3 +26,12 @@ INSERT INTO products (name,price,descr,category,img) VALUES
 ('Theme: Minimal Blog',699,'Blog theme','templates','assets/products/pexels-vika-glitter-392079-33653166.jpg'),
 ('Checklist: Launch Plan',89,'Printable checklist','ebooks','assets/products/photo-1526170375885-4d8ecf77b99f.avif'),
 ('Graphics Pack',299,'Illustrations & mockups','templates','assets/products/premium_photo-1664392147011-2a720f214e01.avif');
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(200) NOT NULL,
+  `email` VARCHAR(255) NOT NULL UNIQUE,
+  `password` VARCHAR(255) NOT NULL,
+  `role` VARCHAR(50) DEFAULT 'customer',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
