@@ -11,21 +11,43 @@
   <body>
     <!-- Navbar -->
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-        <div class="container">
-          <a class="navbar-brand fw-bold" href="index.html">SuppMart</a>
-          <button class="navbar-toggler ms-auto" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+      <nav class="navbar navbar-light bg-white shadow-sm">
+        <div class="container d-flex align-items-center justify-content-between">
+          <a class="navbar-brand fw-bold mb-0" href="index.html">SuppMart</a>
+
+          <button
+            class="menu-trigger"
+            type="button"
+            data-mdb-toggle="offcanvas"
+            data-mdb-target="#siteMenu"
+            aria-controls="siteMenu"
+            aria-label="Open menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto align-items-lg-center">
-              <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
-              <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-              <li class="nav-item"><a class="btn btn-primary ms-lg-2 mt-2 mt-lg-0" href="signup.html">Sign up</a></li>
-            </ul>
-          </div>
         </div>
       </nav>
+
+      <div
+        class="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="siteMenu"
+        aria-labelledby="siteMenuLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="siteMenuLabel">Menu</h5>
+          <button type="button" class="btn-close text-reset" data-mdb-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <div class="list-group list-group-flush site-menu-list">
+            <a href="products.html" class="list-group-item list-group-item-action">Products</a>
+            <a href="login.html" class="list-group-item list-group-item-action">Login</a>
+            <a href="signup.html" class="list-group-item list-group-item-action">Signup</a>
+          </div>
+        </div>
+      </div>
     </header>
 
     <!-- Hero -->
