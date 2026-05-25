@@ -24,9 +24,20 @@ function formatPrice(n){ return '৳ '+n.toFixed(2); }
 function renderFeatured(){
   const el = document.getElementById('featured'); if(!el) return;
   el.innerHTML = '';
-    sampleProducts.slice(0,4).forEach(p=>{
+  sampleProducts.slice(0,4).forEach(p=>{
     const col = document.createElement('div'); col.className='col-md-3 mb-3';
-    col.innerHTML = `<div class="card-e p-3 h-100"><div class="product-thumb"><img src="${p.img}" alt="${p.name}"></div><h5 class="mt-3">${p.name}</h5><div class="text-primary fw-bold">${formatPrice(p.price)}</div><a href="product.html?id=${p.id}" class="btn btn-sm btn-outline-primary mt-2">View</a></div>`;
+    col.innerHTML = `
+      <div class="card-e featured-card h-100">
+        <div class="product-thumb featured-thumb"><img src="${p.img}" alt="${p.name}"></div>
+        <div class="featured-details">
+          <h5 class="mb-1">${p.name}</h5>
+          <p class="text-muted small mb-2">${p.desc}</p>
+          <div class="d-flex justify-content-between align-items-center gap-2">
+            <div class="fw-bold text-primary">${formatPrice(p.price)}</div>
+            <a href="product.html?id=${p.id}" class="btn btn-sm btn-outline-primary">View</a>
+          </div>
+        </div>
+      </div>`;
     el.appendChild(col);
   });
 }
