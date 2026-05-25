@@ -1,0 +1,17 @@
+:root{--accent:#2a9d8f;--muted:#666}
+*{box-sizing:border-box;font-family:Inter, system-ui, Arial, sans-serif}
+body{margin:0;color:#111;background:#f7f7f7}
+.navbar-brand{color:var(--accent)!important}
+.hero{padding:3rem 1rem;text-align:center;background:linear-gradient(90deg,#e6fffa,#f0fff9);border-bottom:1px solid #e6e6e6}
+.card-e{background:#fff;padding:12px;border-radius:10px;border:1px solid #eee}
+.product-thumb{height:160px;background:#f7f7f7;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:28px}
+.mobile-bottom-nav{position:fixed;left:0;right:0;bottom:0;height:56px;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;align-items:center}
+.mobile-bottom-nav a{color:#444;text-decoration:none;font-size:13px}
+.mobile-bottom-nav a.active{color:var(--accent);font-weight:600}
+.container{max-width:1100px}
+
+/* Dark mode support */
+body.dark{background:#0f1720;color:#e6eef2}
+body.dark .card-e{background:#0b1220;border-color:#15202a}
+body.dark .mobile-bottom-nav{background:#071018;border-top-color:#09202a}
+

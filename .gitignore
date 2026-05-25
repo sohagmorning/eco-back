@@ -1,0 +1,11 @@
+/.env
+/vendor/
+/node_modules/
+/backend/vendor/
+/backend/.env
+.DS_Store
+.idea/
+.vscode/
+# OS files
+Thumbs.db
+desktop.ini

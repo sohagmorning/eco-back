@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Products — Eco Shop</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">Eco Shop</a>
+        <div class="ms-auto">
+          <a class="btn btn-outline-secondary me-2" href="cart.html">Cart</a>
+          <a class="btn btn-primary" href="signup.html">Sign up</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Products</h2>
+        <div class="d-flex gap-2">
+          <input id="searchInput" class="form-control" placeholder="Search products..." />
+          <select id="filterCategory" class="form-select w-auto">
+            <option value="all">All</option>
+            <option value="ebooks">Ebooks</option>
+            <option value="templates">Templates</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row" id="productGrid"></div>
+    </main>
+
+    <div class="mobile-bottom-nav d-lg-none">
+      <a href="index.html">Home</a>
+      <a href="products.html" class="active">Products</a>
+      <a href="cart.html">Cart</a>
+      <a href="profile.html">Profile</a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

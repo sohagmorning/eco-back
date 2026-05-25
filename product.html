@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Product — Eco Shop</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">Eco Shop</a>
+      </div>
+    </nav>
+
+    <main class="container py-4">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body text-center" id="productImage">🖼️</div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h2 id="productTitle">Product Title</h2>
+          <p id="productDesc">Product description goes here.</p>
+          <h4 class="text-primary" id="productPrice">৳ 0.00</h4>
+          <div class="d-flex gap-2">
+            <button id="addToCart" class="btn btn-primary">Add to Cart</button>
+            <a href="checkout.html" class="btn btn-outline-success">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

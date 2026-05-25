@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Eco Shop — Demo Landing</title>
+    <!-- MDB UI Kit (free) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+          <a class="navbar-brand fw-bold" href="index.html">Eco Shop</a>
+          <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+              <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+              <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+              <li class="nav-item"><a class="btn btn-primary ms-2" href="signup.html">Sign up</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="py-5 text-center hero">
+      <div class="container">
+        <h1 class="display-5 fw-bold">Sell & Buy Digital Products</h1>
+        <p class="lead text-muted">Responsive, mobile-first demo using MDBootstrap-style UI.</p>
+        <a class="btn btn-lg btn-outline-primary" href="products.html">Explore Products</a>
+      </div>
+    </section>
+
+    <!-- Featured products -->
+    <section class="py-5">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3>Featured Products</h3>
+          <a href="products.html">See all</a>
+        </div>
+        <div class="row" id="featured">
+          <!-- JS will inject sample cards here using script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials / FAQ -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>What our users say</h4>
+            <p class="text-muted">"Great marketplace for digital creators."</p>
+          </div>
+          <div class="col-md-6" id="faq">
+            <h4>FAQ</h4>
+            <ul>
+              <li>How do downloads work? — Secure links after purchase.</li>
+              <li>What payments are supported? — Stripe, Razorpay, PayPal (demo).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center">
+      <div class="container">
+        <small class="text-muted">© Eco Shop — Demo</small>
+      </div>
+    </footer>
+
+    <!-- Mobile bottom nav -->
+    <div class="mobile-bottom-nav d-lg-none">
+      <a href="index.html" class="active">Home</a>
+      <a href="products.html">Products</a>
+      <a href="cart.html">Cart</a>
+      <a href="profile.html">Profile</a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
