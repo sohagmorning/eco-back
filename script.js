@@ -188,7 +188,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
   if(params.get('all')==='1'){
     const s = document.getElementById('searchInput'); if(s) s.value='';
     const f = document.getElementById('filterCategory'); if(f) f.value='all';
+    // Explicitly request all products to avoid any residual filtering
+    renderProductGrid({});
   }
-  renderProductGrid(); setupProductsActions(); renderCartList(); loadProductDetail(); setupDarkMode();
+  renderProductGrid(); setupProductsActions(); setupAuthForms(); renderCartList(); loadProductDetail(); setupDarkMode();
 });
 
