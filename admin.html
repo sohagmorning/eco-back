@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Admin Panel — SupMart</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-light bg-white shadow-sm">
+        <div class="container d-flex align-items-center justify-content-between">
+          <a class="navbar-brand fw-bold mb-0" href="index.html">SupMart</a>
+          <div class="d-flex align-items-center gap-2">
+            <a class="btn btn-outline-secondary btn-sm" href="index.html">View site</a>
+            <button class="menu-trigger" type="button" data-mdb-toggle="offcanvas" data-mdb-target="#siteMenu" aria-controls="siteMenu" aria-label="Open menu">
+              <span></span><span></span><span></span>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="siteMenu" aria-labelledby="siteMenuLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="siteMenuLabel">Menu</h5>
+          <button type="button" class="btn-close text-reset" data-mdb-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <div class="list-group list-group-flush site-menu-list">
+            <a href="admin.html" class="list-group-item list-group-item-action">Admin Panel</a>
+            <a href="products.html?all=1" class="list-group-item list-group-item-action">Products</a>
+            <a href="seller-dashboard.html" class="list-group-item list-group-item-action">Seller Dashboard</a>
+            <a href="customer-dashboard.html" class="list-group-item list-group-item-action">Customer Dashboard</a>
+            <a href="login.html" class="list-group-item list-group-item-action">Login</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="py-4">
+      <div class="container admin-shell">
+        <aside class="admin-sidebar">
+          <div class="admin-brand">
+            <div class="fw-bold fs-4">SupMart</div>
+            <span class="badge">Admin</span>
+          </div>
+          <div class="admin-nav">
+            <a class="active" href="#overview"><span>Dashboard</span><span>01</span></a>
+            <a href="#products"><span>Products</span><span>12</span></a>
+            <a href="#product-form"><span>Add Product</span><span>+</span></a>
+            <a href="#uploads"><span>Uploads</span><span>IMG</span></a>
+            <a href="#orders"><span>Orders</span><span>0</span></a>
+          </div>
+          <div class="mt-4 p-3 rounded-4" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)">
+            <div class="section-kicker mb-2" style="color:#91a1b3">Quick note</div>
+            <p class="mb-0 small" style="color:#d9e3ee">This is the admin scaffold. Next step: connect the form to backend CRUD + image upload.</p>
+          </div>
+        </aside>
+
+        <section class="admin-main">
+          <div class="admin-hero mb-4" id="overview">
+            <div class="section-kicker mb-2">Control center</div>
+            <h1 class="mb-2">Admin Panel</h1>
+            <p class="text-muted mb-0">Manage products, upload images, and keep the storefront updated from one place.</p>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-md-4">
+              <div class="stat-card">
+                <div class="label">Total Products</div>
+                <div class="value" id="statProducts">12</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="stat-card">
+                <div class="label">Featured Items</div>
+                <div class="value">4</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="stat-card">
+                <div class="label">Pending Orders</div>
+                <div class="value">0</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-panel mb-4" id="product-form">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+              <div>
+                <div class="section-kicker">Products</div>
+                <h3 class="mb-1">Add / Edit Product</h3>
+                <p class="text-muted mb-0">Form structure ready for backend CRUD and image upload.</p>
+              </div>
+              <a href="products.html?all=1" class="btn btn-outline-primary btn-sm">Preview store</a>
+            </div>
+
+            <form class="admin-form row g-3">
+              <div class="col-md-6">
+                <label class="form-label" for="productName">Product name</label>
+                <input class="form-control" id="productName" placeholder="e.g. Premium UI Kit" />
+              </div>
+              <div class="col-md-3">
+                <label class="form-label" for="productPrice">Price</label>
+                <input class="form-control" id="productPrice" type="number" placeholder="499" />
+              </div>
+              <div class="col-md-3">
+                <label class="form-label" for="productCategory">Category</label>
+                <select class="form-select" id="productCategory">
+                  <option value="templates">Templates</option>
+                  <option value="ebooks">Ebooks</option>
+                  <option value="graphics">Graphics</option>
+                </select>
+              </div>
+              <div class="col-md-12">
+                <label class="form-label" for="productDesc">Description</label>
+                <textarea class="form-control" id="productDesc" rows="3" placeholder="Short product description"></textarea>
+              </div>
+              <div class="col-md-6" id="uploads">
+                <label class="form-label" for="productImage">Cover image</label>
+                <input class="form-control" id="productImage" type="file" accept="image/*" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="featuredToggle">Featured</label>
+                <select class="form-select" id="featuredToggle">
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+              <div class="col-12 d-flex gap-2 flex-wrap">
+                <button type="button" class="btn btn-primary">Save product</button>
+                <button type="button" class="btn btn-outline-secondary">Reset</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="admin-panel mb-4" id="products">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+              <div>
+                <div class="section-kicker">Inventory</div>
+                <h3 class="mb-0">Product List</h3>
+              </div>
+              <div class="d-flex gap-2 flex-wrap">
+                <input class="form-control" style="min-width:220px" placeholder="Search product..." />
+                <select class="form-select" style="width:auto">
+                  <option>All</option>
+                  <option>Templates</option>
+                  <option>Ebooks</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-responsive admin-table">
+              <table class="table align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminProductRows">
+                  <tr>
+                    <td colspan="6" class="text-muted">Products will load here after backend CRUD is connected.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="admin-panel" id="orders">
+            <div class="section-kicker">Operations</div>
+            <h3 class="mb-1">Orders</h3>
+            <p class="text-muted mb-0">This section is reserved for order review, status updates, and payment reconciliation.</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
